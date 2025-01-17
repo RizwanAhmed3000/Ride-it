@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import Swiper from "react-native-swiper";
 import { onboarding } from "@/constants";
+import BlueBtn from "@/components/BlueBtn";
 
 const Onboarding = () => {
   const swriperRef = useRef<Swiper>(null);
@@ -32,11 +33,25 @@ const Onboarding = () => {
         onIndexChanged={(index) => setActiveIndex(index)}
       >
         {onboarding.map((item) => (
-          <View key={item.id} className="">
-            <Text>{item.title}</Text>
+          <View key={item.id} className="flex justify-center items-center p-5">
+            <Image
+              source={item.image}
+              className="w-full h-[300px]"
+              resizeMode="contain"
+            />
+            <View className="flex flex-row justify-center items-center w-full mt-10">
+              <Text className="text-3xl font-bold text-black mx-10 text-center">
+                {item.title}
+              </Text>
+            </View>
+            <Text className="text-md text-center mx-10 font-JakartaSemiBold mt-3 text-[#858585]">
+              {item.description}
+            </Text>
           </View>
         ))}
       </Swiper>
+
+      <BlueBtn title="Next"/>
     </SafeAreaView>
   );
 };
