@@ -7,12 +7,12 @@ import { onboarding } from "@/constants";
 import CustomBtn from "@/components/CustomBtn";
 
 const Onboarding = () => {
-  let deviceWidth = Dimensions.get("window").width;
+  // let deviceWidth = Dimensions.get("window").width;
   let deviceHeight = Dimensions.get("window").height;
   const swriperRef = useRef<Swiper>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const isLastSlide = activeIndex === onboarding.length - 1;
-  const customHeight = deviceHeight / 2.5;
+  const customHeight = deviceHeight / 2.8;
 
   return (
     <SafeAreaView className="flex h-full items-center justify-between bg-white px-6 py-3">
