@@ -50,7 +50,7 @@ const CustomBtn = ({
     >
       {IconLeft && <IconLeft />}
       <Text
-        className={`text-lg font-JakartaBold text-white ${getTextVariantStyle(textVariant)}`}
+        className={`text-lg font-JakartaBold ${getTextVariantStyle(textVariant)}`}
       >
         {title}
       </Text>
