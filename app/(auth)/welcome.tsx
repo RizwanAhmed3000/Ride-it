@@ -1,17 +1,21 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { View, Text, TouchableOpacity, Image, Dimensions } from "react-native";
 import React, { useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import Swiper from "react-native-swiper";
 import { onboarding } from "@/constants";
-import BlueBtn from "@/components/BlueBtn";
+import CustomBtn from "@/components/CustomBtn";
 
 const Onboarding = () => {
+  let deviceWidth = Dimensions.get("window").width;
+  let deviceHeight = Dimensions.get("window").height;
   const swriperRef = useRef<Swiper>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const isLastSlide = activeIndex === onboarding.length - 1;
+  const customHeight = deviceHeight / 2.5;
 
   return (
-    <SafeAreaView className="flex h-full items-center justify-between bg-white px-6">
+    <SafeAreaView className="flex h-full items-center justify-between bg-white px-6 py-3">
       <TouchableOpacity
         className="w-full flex justify-end items-end py-5"
         onPress={() => {
@@ -36,7 +40,7 @@ const Onboarding = () => {
           <View key={item.id} className="flex justify-center items-center p-5">
             <Image
               source={item.image}
-              className="w-full h-[300px]"
+              style={{ width: "100%", height: customHeight }}
               resizeMode="contain"
             />
             <View className="flex flex-row justify-center items-center w-full mt-10">
@@ -51,7 +55,17 @@ const Onboarding = () => {
         ))}
       </Swiper>
 
-      <BlueBtn title="Next"/>
+      <CustomBtn
+        title={isLastSlide ? "Get Started" : "Next"}
+        className="w-11/12 mt-10"
+        onPress={() => {
+          if (isLastSlide) {
+            router.replace(`/(auth)/sign-up`);
+          } else {
+            swriperRef.current?.scrollBy(1);
+          }
+        }}
+      />
     </SafeAreaView>
   );
 };
