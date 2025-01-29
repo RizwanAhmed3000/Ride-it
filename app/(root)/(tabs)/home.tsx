@@ -1,6 +1,5 @@
 import RideCard from "@/components/RideCard";
-import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
-import { Link } from "expo-router";
+import { useUser } from "@clerk/clerk-expo";
 import { FlatList, SafeAreaView, Text, View } from "react-native";
 
 const recentRides = [
@@ -115,9 +114,20 @@ export default function Home() {
 
   return (
     <SafeAreaView className="p-4 bg-general-500">
+      <Text className="text-2xl font-JakartaExtraBold text-gray-900 my-4">
+        Recent Rides
+      </Text>
       <FlatList
         data={recentRides?.slice(0, 5)}
         renderItem={({ item }) => <RideCard ride={item} />}
+        className=""
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 150 }}
+        ListEmptyComponent={() => (
+          <View>
+            <Text>No Rides Found</Text>
+          </View>
+        )}
       />
       {/* <RideCard ride={recentRides[0]} /> */}
     </SafeAreaView>

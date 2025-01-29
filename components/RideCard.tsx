@@ -18,7 +18,7 @@ const RideCard = ({
 }: {
   ride: Ride;
 }) => {
-  console.log(origin_address);
+  // console.log(origin_address);
   return (
     <View className="flex flex-row items-center justify-center bg-white rounded-lg shadow-sm shadow-neutral-300 mb-3">
       <View className="flex flex-col items-start justify-center p-3">
@@ -52,8 +52,32 @@ const RideCard = ({
             <Text className="text-md font-JakartaMedium text-gray-500">
               Date & Time
             </Text>
-            <Text className="text-md font-JakartaMedium text-gray-500">
+            <Text className="text-md font-JakartaMedium text-black">
               {formatDate(created_at)}, {formatTime(ride_time)}
+            </Text>
+          </View>
+          <View className="flex flex-row items-center w-full justify-between mb-5">
+            <Text className="text-md font-JakartaMedium text-gray-500">
+              Driver
+            </Text>
+            <Text className="text-md font-JakartaMedium text-black">
+              {driver.first_name} {driver.last_name}
+            </Text>
+          </View>
+          <View className="flex flex-row items-center w-full justify-between mb-5">
+            <Text className="text-md font-JakartaMedium text-gray-500">
+              Car Seat
+            </Text>
+            <Text className="text-md font-JakartaMedium text-black">
+              {driver.car_seats}
+            </Text>
+          </View>
+          <View className="flex flex-row items-center w-full justify-between mb-5">
+            <Text className="black">Payment Status</Text>
+            <Text
+              className={`text-md capitalize font-JakartaMedium text-gray-500 ${payment_status === "paid" ? "text-green-500" : "text-red-500"}`}
+            >
+              {payment_status}
             </Text>
           </View>
         </View>
