@@ -114,11 +114,12 @@ export default function Home() {
   const { user } = useUser();
 
   return (
-    <SafeAreaView className="bg-general-500">
+    <SafeAreaView className="p-4 bg-general-500">
       <FlatList
         data={recentRides?.slice(0, 5)}
         renderItem={({ item }) => <RideCard ride={item} />}
       />
+      {/* <RideCard ride={recentRides[0]} /> */}
     </SafeAreaView>
   );
 }
