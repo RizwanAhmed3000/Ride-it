@@ -1,6 +1,15 @@
 import RideCard from "@/components/RideCard";
+import { icons, images } from "@/constants";
 import { useUser } from "@clerk/clerk-expo";
-import { FlatList, SafeAreaView, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const recentRides = [
   {
@@ -111,6 +120,11 @@ const recentRides = [
 
 export default function Home() {
   const { user } = useUser();
+  // console.log(user);
+  const loading = false;
+  const handelSignout = () => {
+    console.log("signout");
+  };
 
   return (
     <SafeAreaView className="p-4 bg-general-500">
@@ -124,9 +138,40 @@ export default function Home() {
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{ paddingBottom: 150 }}
         ListEmptyComponent={() => (
-          <View>
-            <Text>No Rides Found</Text>
+          <View className="flex flex-col items-center justify-center">
+            {!loading ? (
+              <>
+                <Image
+                  source={images.noResult}
+                  className="w-32 h-32"
+                  alt="No recent rides found"
+                  resizeMode="contain"
+                />
+                <Text className="text-gray-500 text-lg font-JakartaMedium mt-5">
+                  No recent rides found
+                </Text>
+              </>
+            ) : (
+              <ActivityIndicator size={"large"} color="#000" className="mt-5" />
+            )}
           </View>
+        )}
+        ListHeaderComponent={() => (
+          <>
+            <View className="flex flex-row items-center justify-between my-5">
+              <Text className="text-xl font-JakartaBold text-gray-900">
+                Hello,{" "}
+                {user?.firstName ||
+                  user?.emailAddresses[0]?.emailAddress.split("@")[0]}
+              </Text>
+              <TouchableOpacity
+                onPress={handelSignout}
+                className="bg-white justify-center items-center w-10 h-10 rounded-full"
+              >
+                <Image source={icons.out} className="w-5 h-5" alt="logout" />
+              </TouchableOpacity>
+            </View>
+          </>
         )}
       />
       {/* <RideCard ride={recentRides[0]} /> */}
